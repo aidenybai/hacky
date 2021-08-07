@@ -1,0 +1,14 @@
+lockfileVersion: 5.3
+
+specifiers:
+  million: ^0.3.2
+
+dependencies:
+  million: 0.3.2
+
+packages:
+
+  /million/0.3.2:
+    resolution: {integrity: sha512-osRiX+4AKVTzphh4zTNsf9zSevfg2tEhnQ2ZG/EiS9cxQQxKQssz23ycG98VLWH9kZYFefIEGYCZbX7WwuQ0ZQ==}
+    engines: {node: '>=14.0.0'}
+    dev: false

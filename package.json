@@ -1,0 +1,30 @@
+{
+  "name": "hacky",
+  "version": "0.0.0",
+  "description": "Functional component-based UI library",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aidenybai/hacky.git"
+  },
+  "keywords": [
+    "virtual-dom",
+    "million",
+    "ui-library",
+    "component",
+    "javascript",
+    "react"
+  ],
+  "author": "Aiden Bai <hello@aidenybai.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aidenybai/hacky/issues"
+  },
+  "homepage": "https://github.com/aidenybai/hacky#readme",
+  "dependencies": {
+    "million": "^0.3.2"
+  }
+}
