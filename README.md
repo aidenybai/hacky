@@ -18,7 +18,7 @@ npm install hacky
 
 Below is an extremely simple implementation of a Clicker Game example using Hacky.
 
-```ts
+```tsx
 import { render, useState } from 'hacky';
 
 const App = () => {
