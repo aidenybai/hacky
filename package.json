@@ -1,14 +1,27 @@
 {
   "name": "hacky",
-  "version": "0.0.0",
-  "description": "Functional component-based UI library",
-  "main": "src/index.ts",
+  "version": "0.0.1",
+  "description": "*Fun*ctional component-based UI library",
+  "main": "dist/hacky.cjs.js",
+  "module": "dist/hacky.esm.js",
+  "jsdelivr": "dist/hacky.esm.min.js",
+  "unpkg": "dist/hacky.esm.min.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "rm -rf dist/ && rollup -c",
+    "test": "echo \"lol who actually tests\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aidenybai/hacky.git"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/hacky.esm.js",
+      "require": "./dist/hacky.cjs.js"
+    }
   },
   "keywords": [
     "virtual-dom",
@@ -16,7 +29,8 @@
     "ui-library",
     "component",
     "javascript",
-    "react"
+    "react",
+    "functional"
   ],
   "author": "Aiden Bai <hello@aidenybai.com>",
   "license": "MIT",
@@ -26,5 +40,14 @@
   "homepage": "https://github.com/aidenybai/hacky#readme",
   "dependencies": {
     "million": "^0.3.2"
+  },
+  "devDependencies": {
+    "rollup": "^2.56.0",
+    "rollup-plugin-filesize": "^9.1.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5",
+    "vite": "^2.4.4"
   }
 }
