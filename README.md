@@ -21,13 +21,15 @@ Below is an extremely simple implementation of a Clicker Game example using Hack
 ```tsx
 import { render, useState } from 'hacky';
 
-const App = () => {
-  const [count, setCount] = useState(0);
+const App =
+  ({ props }) =>
+  () => {
+    const [count, setCount] = useState(props);
 
-  return <button onclick={() => setCount(count + 1)}>{count}</button>;
-};
+    return <button onclick={() => setCount(count + 1)}>{count}</button>;
+  };
 
-render(App, document.querySelector('#app'));
+render(document.querySelector('#app'), <App props={0} />);
 // HTML is just <div id="app"></div>
 ```
 

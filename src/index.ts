@@ -15,7 +15,7 @@ export const initRootVNode = (root: HTMLElement) =>
     )
   );
 
-export const render = (component: () => VNode, root: HTMLElement): void => {
+export const render = (root: HTMLElement, component: () => VNode): void => {
   let rootVNode = root[ROOT_NODE_FIELD];
   currentRootAndComponent = [root, component];
 
@@ -38,7 +38,7 @@ export const useState = <T>(initial: T): [T, (value: T) => void] => {
     currentRoot[ROOT_HOOKS_FIELD],
     (value: T): void => {
       currentRoot[ROOT_HOOKS_FIELD] = value;
-      render(currentComponent, currentRoot);
+      render(currentRoot, currentComponent);
     },
   ];
 };
