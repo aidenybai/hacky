@@ -1,9 +1,12 @@
 import { VNode, m, patch, schedule, OLD_VNODE_FIELD } from 'million';
 
+// Field for the initial root vnode
 const ROOT_NODE_FIELD = '__h_root_node';
+// Field for the value of the state (can only hold one useState per root vnode)
 const ROOT_HOOKS_FIELD = '__h_hooks';
 let currentRootAndComponent: [HTMLElement, () => VNode];
 
+// Initial root _cannot have children_
 export const initRootVNode = (root: HTMLElement) =>
   m(
     root.tagName.toLowerCase(),
@@ -18,6 +21,8 @@ export const render = (component: () => VNode, root: HTMLElement): void => {
 
   if (!rootVNode) {
     rootVNode = initRootVNode(root);
+    // Must have a seperate initialization to hold the initial root
+    // This is because the rootVNode variable is mutated below
     root[OLD_VNODE_FIELD] = initRootVNode(root);
     root[ROOT_NODE_FIELD] = rootVNode;
   }
