@@ -2,9 +2,10 @@ import { VNode, m, patch, schedule, OLD_VNODE_FIELD } from 'million';
 
 // Field for the initial root vnode
 const ROOT_NODE_FIELD = '__h_root_node';
-// Field for the value of the state (can only hold one useState per root vnode)
-const ROOT_HOOKS_FIELD = '__h_hooks';
-let currentRootAndComponent: [HTMLElement, () => VNode];
+// Field for the valuse of the state (can only hold one useState per root vnode)
+const STATE_VALUE_FIELD = '__h_state_value';
+let currentRootAndVNode: [HTMLElement, VNode];
+let i = 0;
 
 // Initial root _cannot have children_
 export const initRootVNode = (root: HTMLElement) =>
@@ -15,9 +16,9 @@ export const initRootVNode = (root: HTMLElement) =>
     )
   );
 
-export const render = (root: HTMLElement, component: () => VNode): void => {
+export const render = (root: HTMLElement, vnode: VNode): void => {
   let rootVNode = root[ROOT_NODE_FIELD];
-  currentRootAndComponent = [root, component];
+  currentRootAndVNode = [root, vnode];
 
   if (!rootVNode) {
     rootVNode = initRootVNode(root);
@@ -26,19 +27,27 @@ export const render = (root: HTMLElement, component: () => VNode): void => {
     root[OLD_VNODE_FIELD] = initRootVNode(root);
     root[ROOT_NODE_FIELD] = rootVNode;
   }
-  rootVNode.children = [component()];
+  rootVNode.children = [vnode];
   schedule(() => patch(root, rootVNode));
 };
 
 export const useState = <T>(initial: T): [T, (value: T) => void] => {
-  const [currentRoot, currentComponent] = currentRootAndComponent;
+  const [currentRoot, currentVNode] = currentRootAndVNode;
 
-  if (!currentRoot[ROOT_HOOKS_FIELD]) currentRoot[ROOT_HOOKS_FIELD] = initial;
+  if (!currentRoot[STATE_VALUE_FIELD]) {
+    currentRoot[STATE_VALUE_FIELD] = [initial];
+  } else {
+    i++;
+    // Pushed each time, we do not want this
+    // How do we figure out if the initial has already been pushed?
+    currentRoot[STATE_VALUE_FIELD].push(initial);
+  }
   return [
-    currentRoot[ROOT_HOOKS_FIELD],
+    currentRoot[STATE_VALUE_FIELD][i],
     (value: T): void => {
-      currentRoot[ROOT_HOOKS_FIELD] = value;
-      render(currentRoot, currentComponent);
+      i++;
+      currentRoot[STATE_VALUE_FIELD].push(value);
+      render(currentRoot, currentVNode);
     },
   ];
 };
