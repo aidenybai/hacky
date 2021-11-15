@@ -21,18 +21,21 @@ npm install hacky
 Below is an extremely simple implementation of a Clicker Game example using Hacky.
 
 ```tsx
-import { render, useState } from 'hacky';
+import { button, init } from 'hacky';
 
-const App =
-  ({ props }) =>
-  () => {
-    const [count, setCount] = useState(props);
+const Clicker = (count) =>
+  button(
+    {
+      onClick: () => {
+        update(count + 1);
+      },
+    },
+    [count],
+  );
 
-    return <button onclick={() => setCount(count + 1)}>{count}</button>;
-  };
+const update = init(Clicker);
 
-render(document.querySelector('#app'), <App props={0} />);
-// HTML is just <div id="app"></div>
+document.body.appendChild(update(0));
 ```
 
 ## Acknowledgments
