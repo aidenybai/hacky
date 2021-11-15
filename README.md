@@ -1,5 +1,3 @@
-> Hacky is currently undergoing a major refactor. Stay tuned!
-
 # 🔧 Hacky
 
 ### *Fun*ctional component-based UI library
