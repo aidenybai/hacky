@@ -8,7 +8,7 @@ export const element = (tagName: string) => {
     if (Array.isArray(param1)) {
       return h(tagName, param2, ...param1);
     } else {
-      return h(tagName, param1, ...param2);
+      return h(tagName, param1, ...(param2 ?? []));
     }
   }
   return vnode;
