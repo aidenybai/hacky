@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  million: ^0.5.3
+  million: ^0.7.0
   rollup: ^2.56.3
   rollup-plugin-filesize: ^9.1.1
   rollup-plugin-terser: ^7.0.2
@@ -11,7 +11,7 @@ specifiers:
   vite: ^2.5.6
 
 dependencies:
-  million: 0.5.3
+  million: 0.7.0
 
 devDependencies:
   rollup: 2.56.3
@@ -898,9 +898,9 @@ packages:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: true
 
-  /million/0.5.3:
-    resolution: {integrity: sha512-A/G708jXwHA9doacvXKu1Kv0kkn2kuVQdgGupIb+qHS7sgxk7JeNIB5hMf24vhxxM+/O65l3fd/Fawhk3Xf8DQ==}
-    engines: {node: '>=14.0.0'}
+  /million/0.7.0:
+    resolution: {integrity: sha512-LC09bOBitXDa4dodsS8hq3WRr+eHmGl3CxQjNFXmEi1uc46HapeCUd6b5yrClHJJ+KFV5X8ILmmGKbIyqs1WCA==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
   /mime-db/1.49.0:

@@ -1,26 +1,18 @@
 import { VNode, VProps } from 'million';
-import { jsx as vnode, JSXVNode } from 'million/jsx-runtime';
+import { h, JSXVNode } from 'million/jsx-runtime';
 
-type Tokens = (VNode | VNode[] | VProps)[];
-
-export const element =
-  (tagName: string): ((...tokens: Tokens) => VNode) =>
-  (...tokens: Tokens): VNode => {
-    let props: VProps = {};
-    const children: JSXVNode[] = [];
-    for (let i = 0; i < tokens.length; i++) {
-      if (typeof tokens[i] === 'object' && tokens[i] !== null) {
-        if (Array.isArray(tokens[i])) {
-          children.push(...(<JSXVNode[]>tokens[i]));
-        } else {
-          props = { ...props, ...(<VProps>tokens[i]) };
-        }
-      } else {
-        children.push(<JSXVNode>(<unknown>tokens[i]));
-      }
+export const element = (tagName: string) => {
+  function vnode(props: VProps): VNode;
+  function vnode(children: JSXVNode[]): VNode;
+  function vnode(param1?: any, param2?: any): VNode {
+    if (Array.isArray(param1)) {
+      return h(tagName, param2, ...param1);
+    } else {
+      return h(tagName, param1, ...param2);
     }
-    return vnode(tagName, props, ...children);
-  };
+  }
+  return vnode;
+};
 
 export const input = element('input');
 export const textarea = element('textarea');
@@ -58,7 +50,7 @@ export const abbr = element('abbr');
 export const b = element('b');
 export const bdi = element('bdi');
 export const bdo = element('bdo');
-export const br = element('br')();
+export const br = element('br');
 export const cite = element('cite');
 export const code = element('code');
 export const data = element('data');
