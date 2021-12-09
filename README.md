@@ -18,22 +18,25 @@ npm install hacky
 
 Below is an extremely simple implementation of a Clicker Game example using Hacky.
 
-```tsx
-import { button, init } from 'hacky';
+```html
+<script type="module">
+  import { button, span, init, memo } from 'https://unpkg.com/hacky';
 
-const Clicker = (count) =>
-  button(
-    {
-      onClick: () => {
-        update(count + 1);
+  const Text = memo((message) => span({ style: { color: 'red' } }, [message]));
+  const Clicker = (count) =>
+    button(
+      {
+        onClick: () => update(count++),
       },
-    },
-    [count],
-  );
+      [Text(count)],
+    );
 
-const update = init(Clicker);
+  const update = init(Clicker);
 
-document.body.appendChild(update(0));
+  document.body.appendChild(update(0));
+</script>
+
+<main id="app"></main>
 ```
 
 ## Acknowledgments

@@ -1,7 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
-  million: ^0.7.0
+  hyperx-tmp: ^2.5.4
+  million: latest
   rollup: ^2.56.3
   rollup-plugin-filesize: ^9.1.1
   rollup-plugin-terser: ^7.0.2
@@ -11,7 +12,8 @@ specifiers:
   vite: ^2.5.6
 
 dependencies:
-  million: 0.7.0
+  hyperx-tmp: 2.5.4
+  million: 1.0.1
 
 devDependencies:
   rollup: 2.56.3
@@ -709,6 +711,16 @@ packages:
       ms: 2.1.3
     dev: true
 
+  /hyperscript-attribute-to-property/1.0.2:
+    resolution: {integrity: sha512-oerMul16jZCmrbNsUw8QgrtDzF8lKgFri1bKQjReLw1IhiiNkI59CWuzZjJDGT79UQ1YiWqXhJMv/tRMVqgtkA==}
+    dev: false
+
+  /hyperx-tmp/2.5.4:
+    resolution: {integrity: sha512-oaJV+FvuZfGN1NaRQeFIdd3OYTfjoVO2wh22LCs8K+NN0W8kzbhT9UuvnBSXHudjlBPRHX6coUnXp9J+8V5Elw==}
+    dependencies:
+      hyperscript-attribute-to-property: 1.0.2
+    dev: false
+
   /iconv-lite/0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
@@ -898,8 +910,8 @@ packages:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: true
 
-  /million/0.7.0:
-    resolution: {integrity: sha512-LC09bOBitXDa4dodsS8hq3WRr+eHmGl3CxQjNFXmEi1uc46HapeCUd6b5yrClHJJ+KFV5X8ILmmGKbIyqs1WCA==}
+  /million/1.0.1:
+    resolution: {integrity: sha512-B7bbH7El5Dz2iVx7nSRdp9LG+SoqsIoRai//2mX16upMB9XQQbCa+RSKJzMxtaBvwY5EsYlrzld571p0L/xjjA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
