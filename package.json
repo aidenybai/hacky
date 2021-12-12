@@ -1,6 +1,6 @@
 {
   "name": "hacky",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "*Fun*ctional component-based UI library",
   "main": "dist/hacky.cjs.js",
   "module": "dist/hacky.esm.js",
