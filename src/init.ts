@@ -6,13 +6,9 @@ export type FC = (state: State) => VNode;
 
 export const init = (component: FC): Update => {
   let el: DOMNode | undefined = undefined;
-  let prevState: State | undefined = undefined;
   return (state: State): DOMNode => {
-    if (prevState !== state) {
-      if (!el) el = createElement(component(state));
-      else schedule(() => patch(el!, component(state)));
-      prevState = state;
-    }
+    if (!el) el = createElement(component(state));
+    else schedule(() => patch(el!, component(state)));
     return el!;
   };
 };
