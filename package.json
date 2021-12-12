@@ -39,7 +39,6 @@
   },
   "homepage": "https://github.com/aidenybai/hacky#readme",
   "dependencies": {
-    "hyperx-tmp": "^2.5.4",
     "million": "latest"
   },
   "devDependencies": {
