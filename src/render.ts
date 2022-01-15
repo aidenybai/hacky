@@ -1,12 +1,14 @@
 import {
-  createElement,
   DOMNode,
+  DOMOperation,
+  entity,
+  schedule,
+  useChildren,
+  createElement,
   useNode,
   useProps,
-  useChildren,
+  VEntity,
   VNode,
-  schedule,
-  DOMOperation,
 } from 'million';
 
 export type Props = Record<string, unknown>;
@@ -16,17 +18,17 @@ export interface Component {
 }
 export interface ComponentData {
   el?: DOMNode;
-  update?: () => DOMNode;
+  update?: () => VNode;
   state: (state: unknown) => {
     get value(): unknown;
     set value(value: unknown);
   };
 }
 
-export const component = (iterator: GeneratorFunction, props: Props): Component => ({
-  iterator: iterator,
-  props: props,
-});
+export const component = (iterator: GeneratorFunction, props: Props): VEntity => {
+  const { data, component } = createComponent({ iterator, props });
+  return entity({ iterator, props, data, component }, () => data.update!(), data.el!);
+};
 
 export const diff = useNode([useChildren(), useProps()]);
 
@@ -43,7 +45,7 @@ export const patch = (
   return data.el;
 };
 
-export const render = ({ iterator, props }: Component, el: DOMNode): DOMNode => {
+export const createComponent = ({ iterator, props }: Component) => {
   const data: ComponentData = {
     el: undefined,
     update: undefined,
@@ -54,17 +56,26 @@ export const render = ({ iterator, props }: Component, el: DOMNode): DOMNode => 
         },
         set value(value: unknown) {
           state = value;
-          data.update!();
+          patch(data.el!, data.update!());
         },
       };
     },
   };
   const component = iterator.bind(data)(props);
+  data.el = createElement(component.next().value);
   data.update = () => {
     const vnode = <VNode>component.next().value;
-    return patch(data.el!, vnode);
+    return vnode;
   };
-  data.el = createElement(component.next().value);
-  el.appendChild(data.el);
+  return {
+    component,
+    data,
+  };
+};
+
+export const render = (entity: VEntity, el: DOMNode): DOMNode => {
+  const data = <ComponentData>entity.data.data;
+  el.appendChild(data.el!);
+
   return el;
 };

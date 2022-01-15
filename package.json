@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/aidenybai/hacky#readme",
   "dependencies": {
-    "million": "^1.1.1"
+    "million": "^1.2.1"
   },
   "devDependencies": {
     "rollup": "^2.64.0",

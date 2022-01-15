@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  million: ^1.1.1
+  million: ^1.2.1
   rollup: ^2.64.0
   rollup-plugin-filesize: ^9.1.2
   rollup-plugin-terser: ^7.0.2
@@ -12,7 +12,7 @@ specifiers:
   vite: ^2.7.12
 
 dependencies:
-  million: 1.1.1
+  million: 1.2.1
 
 devDependencies:
   rollup: 2.64.0
@@ -1491,8 +1491,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /million/1.1.1:
-    resolution: {integrity: sha512-s/k9zxkJdv5sv5aK6RdyHtCV+IvUvKqCPbgDu+y6T0NiCN650yMV36ZySFcMTmsVt+Kvyh7m/m3M2ckbc79roQ==}
+  /million/1.2.1:
+    resolution: {integrity: sha512-H0fBpud6fmVTh9iLRfUN3/WveCXxdMM3dNiGOURPgM4/lJwAjauGQeOoIVXq6mI93RBrduGnocbbJ6upyo9W5g==}
     dev: false
 
   /mime-db/1.51.0:
