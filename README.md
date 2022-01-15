@@ -1,6 +1,6 @@
 # 🔧 Hacky
 
-### *Fun*ctional component-based UI library
+### *Fun*ctional iterator-based UI library
 
 Writing React for applications is alright. Sure, it probably works for most use cases and the DX is great! But some of the time, you just want to ~~limit your potential~~ build a super simple application with basic state and components—That's what Hacky is for!
 
@@ -8,7 +8,7 @@ Writing React for applications is alright. Sure, it probably works for most use 
 
 ## Installing Hacky
 
-It is highly recommended you use a build tool, such as Vite (you can see [how we configured our settings](https://github.com/aidenybai/hacky/blob/master/vite.config.js) under the `esbuild` field). You can use NPM to directly install.
+It is highly recommended you use a build tool, such as Vite. You can use NPM to directly install.
 
 ```
 npm install hacky
@@ -18,32 +18,29 @@ npm install hacky
 
 Below is an extremely simple implementation of a Clicker Game example using Hacky.
 
-```html
-<script type="module">
-  import { button, span, init, memo } from 'https://unpkg.com/hacky';
+```js
+import { button, component, render } from 'hacky';
 
-  const Text = memo((message) => span({ style: { color: 'red' } }, [message]));
-  const Clicker = (count) =>
-    button(
+function* Clicker({ initialCount }) {
+  let count = initialCount;
+  // We do an infinite loop here because the yield statement
+  // will wait until you call `this.update`.
+  while (true) {
+    yield button(
       {
-        onClick: () => update(count++),
+        onClick: () => this.update(count++),
       },
-      [Text(count)],
+      [count],
     );
+  }
+}
 
-  const update = init(Clicker);
-
-  document.body.appendChild(update(0));
-</script>
-
-<main id="app"></main>
+render(component(Clicker, { initialCount: 0 }), document.body);
 ```
 
 ## Acknowledgments
 
 Hacky takes heavy inspiration from [React](https://reactjs.org), and believes in the core philosophies and values behind [Million](https://million.js.org). Feel free to check them out if you interested in an alternative library to use.
-
-_Why is it called "Hacky"? The name originated from a quote from [@HeyArav](https://twitter.com/HeyArav): "~~Hack Club Framework when~~"_
 
 ## License
 

@@ -1,2 +1,2 @@
 export * from './elements';
-export * from './init';
+export * from './render';
