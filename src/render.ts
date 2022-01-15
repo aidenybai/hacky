@@ -17,6 +17,10 @@ export interface Component {
 export interface ComponentData {
   el?: DOMNode;
   update?: () => DOMNode;
+  state: (state: unknown) => {
+    get value(): unknown;
+    set value(value: unknown);
+  };
 }
 
 export const component = (iterator: GeneratorFunction, props: Props): Component => ({
@@ -43,6 +47,17 @@ export const render = ({ iterator, props }: Component, el: DOMNode): DOMNode => 
   const data: ComponentData = {
     el: undefined,
     update: undefined,
+    state(state: unknown) {
+      return {
+        get value() {
+          return state;
+        },
+        set value(value: unknown) {
+          state = value;
+          data.update!();
+        },
+      };
+    },
   };
   const component = iterator.bind(data)(props);
   data.update = () => {

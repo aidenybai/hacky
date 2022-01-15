@@ -22,15 +22,18 @@ Below is an extremely simple implementation of a Clicker Game example using Hack
 import { button, component, render } from 'hacky';
 
 function* Clicker({ initialCount }) {
-  let count = initialCount;
+  const count = this.state(initialCount);
   // We do an infinite loop here because the yield statement
-  // will wait until you call `this.update`.
+  // will generate a new button vnode every time the state of
+  // `count` changes.
   while (true) {
     yield button(
       {
-        onClick: () => this.update(count++),
+        onClick: () => {
+          count.value++;
+        },
       },
-      [count],
+      [count.value],
     );
   }
 }
