@@ -2,15 +2,14 @@
   "name": "hacky",
   "version": "0.1.5",
   "description": "*Fun*ctional component-based UI library",
-  "main": "dist/hacky.cjs.js",
-  "module": "dist/hacky.esm.js",
-  "jsdelivr": "dist/hacky.esm.min.js",
-  "unpkg": "dist/hacky.esm.min.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "jsdelivr": "dist/index.mjs",
+  "unpkg": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist/ && rollup -c",
-    "test": "echo \"lol who actually tests\" && exit 1"
+    "build": "tsup src/index.ts --dts --format esm,cjs"
   },
   "files": [
     "dist"
@@ -22,8 +21,8 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./dist/hacky.esm.js",
-      "require": "./dist/hacky.cjs.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "keywords": [
