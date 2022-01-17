@@ -1,2 +1,3 @@
-export * from './elements';
-export * from './render';
+export * from './component';
+export * from './types';
+export * from './vdom';

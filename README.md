@@ -19,26 +19,24 @@ npm install hacky
 Below is an extremely simple implementation of a Clicker Game example using Hacky.
 
 ```js
-import { button, component, render } from 'hacky';
+import { component, render } from 'hacky';
+import { button } from 'hacky/html';
 
-function* Clicker({ initialCount }) {
-  const count = this.state(initialCount);
+const Clicker = component(function* (initial) {
+  const count = this.state(initial);
   // We do an infinite loop here because the yield statement
   // will generate a new button vnode every time the state of
   // `count` changes.
   while (true) {
-    yield button(
-      {
-        onClick: () => {
-          count.value++;
-        },
+    yield button({
+      onClick: () => {
+        count.value++;
       },
-      [count.value],
-    );
+    })(count.value);
   }
-}
+});
 
-render(component(Clicker, { initialCount: 0 }), document.body);
+render(Clicker(0), document.body);
 ```
 
 ## Acknowledgments

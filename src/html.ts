@@ -1,18 +1,39 @@
 import { VNode, VProps } from 'million';
 import { h, JSXVNode } from 'million/jsx-runtime';
 
-export const elementFactory = (tagName: string, props: VProps = {}, children: JSXVNode[] = []) => {
-  function vnode(props: VProps): VNode;
-  function vnode(children: JSXVNode[]): VNode;
-  function vnode(props: VProps, children: JSXVNode[]): VNode;
-  function vnode(param1?: any, param2?: any): VNode {
-    if (Array.isArray(param1)) {
-      return h(tagName, { ...param2, ...props }, ...param1, ...children);
+export const elementFactory = (
+  tagName: string,
+  defaultProps: VProps = {},
+  defaultChildren: JSXVNode[] = [],
+) => {
+  function vnode1(props: VProps): VNode;
+  function vnode1(...children: JSXVNode[]): VNode;
+  function vnode1(...propsOrChildren: any): VNode | ((...children: JSXVNode[]) => VNode) {
+    if (
+      !propsOrChildren[0]?.flag &&
+      !propsOrChildren[0]?.data &&
+      typeof propsOrChildren[0] === 'object'
+    ) {
+      function vnode2(...children: JSXVNode[]): VNode;
+      function vnode2(...children: JSXVNode[]): VNode {
+        return h(
+          tagName,
+          { ...propsOrChildren[0], ...defaultProps },
+          ...defaultChildren,
+          ...children,
+        );
+      }
+      return vnode2;
     } else {
-      return h(tagName, { ...param1, ...props }, ...(param2 ?? []), ...children);
+      return h(tagName, defaultProps, ...defaultChildren, ...propsOrChildren);
     }
   }
-  return vnode;
+  return vnode1;
+};
+
+export const key = (key: string, props: VProps): VProps => {
+  props.key = key;
+  return props;
 };
 
 export const input = elementFactory('input');
