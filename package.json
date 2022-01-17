@@ -1,6 +1,6 @@
 {
   "name": "hacky",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "*Fun*ctional component-based UI library",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
