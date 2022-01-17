@@ -24,15 +24,16 @@ import { button } from 'hacky/html';
 
 const Clicker = component(function* (initial) {
   const count = this.state(initial);
+  const buttonWithHandler = button({
+    onClick: () => {
+      count.value++;
+    },
+  });
   // We do an infinite loop here because the yield statement
   // will generate a new button vnode every time the state of
   // `count` changes.
   while (true) {
-    yield button({
-      onClick: () => {
-        count.value++;
-      },
-    })(count.value);
+    yield buttonWithHandler(count.value);
   }
 });
 
@@ -43,7 +44,7 @@ render(Clicker(0), document.body);
 
 `component()` function accepts a generator function that yields the "Virtual DOM" nodes.
 
-`button()` function will instantiate a "Virtual DOM" node for an element.
+`button(props?)(children)` function will instantiate a "Virtual DOM" node for an element.
 
 `this.state()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
 
