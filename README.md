@@ -1,8 +1,8 @@
-# 🔧 Hacky
+# ⚙️ Hacky
 
-### *Fun*ctional iterator-based UI library
+### <2kb functional alternative for Crank.js
 
-Writing React for applications is alright. Sure, it probably works for most use cases and the DX is great! But some of the time, you just want to ~~limit your potential~~ build a super simple application with basic state and components—That's what Hacky is for!
+Using React or Crank for applications is alright. Sure, it probably works for most use cases and the DX is great! But some of the time you don't want to deal with hooks and just want to use functions for your application.
 
 > _Plug: Hacky is built on [Million](https://github.com/aidenybai/million), a <1kb compiler-focused virtual DOM. It's fast!_
 
@@ -39,9 +39,17 @@ const Clicker = component(function* (initial) {
 render(Clicker(0), document.body);
 ```
 
+`render()` function has a standard interface that is used in many Virtual DOM libraries. First argument is a Virtual DOM to render, and the second one is a DOM node that will be used as the live DOM reference.
+
+`component()` function accepts a generator function that yields the "Virtual DOM" nodes.
+
+`button()` function will instantiate a "Virtual DOM" node for an element.
+
+`this.state()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
+
 ## Acknowledgments
 
-Hacky takes heavy inspiration from [React](https://reactjs.org), and believes in the core philosophies and values behind [Million](https://million.js.org). Feel free to check them out if you interested in an alternative library to use.
+Hacky takes heavy inspiration from [Crank.js](https://github.com/bikeshaving/crank), and depends on [Million](https://million.js.org). Feel free to check them out if you interested in an alternative library to use.
 
 ## License
 
