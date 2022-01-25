@@ -2,7 +2,6 @@ import {
   createElement,
   DOMNode,
   DOMOperation,
-  schedule,
   useChildren,
   useNode,
   useProps,
