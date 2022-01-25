@@ -1,7 +1,7 @@
 {
   "name": "hacky",
   "version": "0.2.0",
-  "description": "*Fun*ctional component-based UI library",
+  "description": "<2kb tagged template alternative for Crank.js",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "jsdelivr": "dist/index.mjs",
