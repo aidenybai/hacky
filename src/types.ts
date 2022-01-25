@@ -11,5 +11,4 @@ export interface ComponentData {
   update?: () => void;
   createState: (state: unknown) => [() => unknown, (value: unknown) => void];
 }
-export const GeneratorFunction = function* () {}.constructor;
 export const DOM_NODE_REF = '__hacky_dom_node_ref';

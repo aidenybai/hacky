@@ -19,10 +19,11 @@ export const patch = (
   oldVNode?: VNode | VEntity,
   effects: DOMOperation[] = [],
 ) => {
-  const data = diff(el, newVNode, oldVNode, effects, schedule);
+  const data = diff(el, newVNode, oldVNode, effects);
   for (let i = 0; i < effects.length; i++) {
     effects[i]();
   }
+
   return data.el;
 };
 

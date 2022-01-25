@@ -1,6 +1,6 @@
 import { createElement, entity, schedule, VElement, VEntity, VNode, VProps } from 'million';
 import { h as m, JSXVNode } from 'million/jsx-runtime';
-import { Props, ComponentData, GeneratorFunction } from './types';
+import { Props, ComponentData } from './types';
 import { patch } from './vdom';
 
 export const h = (
@@ -9,7 +9,8 @@ export const h = (
   ...children: JSXVNode[]
 ): VElement | VEntity => {
   if (typeof tag === 'function') {
-    if (tag instanceof GeneratorFunction) return component(<GeneratorFunction>tag)(<Props>props);
+    if (tag.constructor.name.toLowerCase().includes('generatorfunction'))
+      return component(<GeneratorFunction>tag)(<Props>props);
     else return tag(props);
   } else {
     return m(tag, props, ...children);
@@ -38,13 +39,12 @@ export const createComponent = (iterator: GeneratorFunction, props: Props = {}) 
     },
   };
   const component = iterator.bind(data)(props);
-  data.el = createElement(component.next().value);
-  data.diff = () => {
-    return <VNode>component.next().value;
-  };
+  data.diff = () => <VNode>component.next().value;
+  data.el = createElement(data.diff());
   data.update = () => {
     const vnode = data.diff!();
     schedule(() => {
+      console.log(vnode);
       patch(data.el!, vnode);
     });
   };
