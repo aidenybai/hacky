@@ -1,6 +1,6 @@
 # ⚙️ Hacky
 
-### <2kb functional alternative for Crank.js
+### <2kb tagged template alternative for Crank.js
 
 Hacky is something that I've always wanted. I've used React previously, but I find hooks too magical and JSX a finicky process that requires a build step. When I discovered Crank.js, I fell in love because of how intuitive it was to understand. Imagine Hacky as Crank.js with tagged templates, but with a lightweight core and simplistic API.
 
