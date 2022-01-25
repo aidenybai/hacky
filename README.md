@@ -6,25 +6,41 @@ Hacky is something that I've always wanted. I've used React previously, but I fi
 
 > _Plug: Hacky is built on [Million](https://github.com/aidenybai/million), a <1kb compiler-focused virtual DOM. It's fast!_
 
-## Clicker Game Example
+## `random.cat` API Example
 
-Below is an extremely simple implementation of a Clicker Game example using Hacky.
+Below is an implementation of a `random.cat` API fetcher example using Hacky ([Live Demo](https://codesandbox.io/s/data-fetching-hacky-75mvi?file=/index.html)).
 
 ```js
 import { html, render } from 'https://cdn.skypack.dev/hacky';
 
-function* Clicker({ initial }) {
-  const [count, setCount] = this.createState(initial);
+const fetchCat = async (url = 'https://aws.random.cat/meow') => {
+  try {
+    const res = await fetch(url);
+    const body = await res.json();
+    return body.file;
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-  // We do an infinite loop here because the yield statement
-  // will generate a new button vnode every time the state of
-  // `count` changes.
+function* Cat({ width, height }) {
+  const [cat, setCat] = this.createState(null);
+
   while (true) {
-    yield html`<button onClick=${() => setCount(count() + 1)}>${count()}</button>`;
+    yield html`<div>
+      <button
+        onClick=${() => {
+          fetchCat().then(setCat);
+        }}
+      >
+        Fetch cat image</button
+      ><br /><br />
+      ${cat() && html`<img src=${cat()} width=${width} height=${height} />`}
+    </div>`;
   }
 }
 
-render(html`<${Clicker} initial=${0} />`, document.body);
+render(html`<${Cat} width=${400} height=${400} />`, document.body);
 ```
 
 `render()` function has a standard interface that is used in many Virtual DOM libraries. First argument is a Virtual DOM to render, and the second one is a DOM node that will be used as the live DOM reference.
