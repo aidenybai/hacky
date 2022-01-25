@@ -9,14 +9,14 @@ import {
   VEntity,
   VNode,
 } from 'million';
-import { ComponentData } from './types';
+import { ComponentData, DOM_NODE_REF } from './types';
 
 export const diff = useNode([useChildren(), useProps()]);
 
 export const patch = (
   el: DOMNode,
-  newVNode?: VNode,
-  oldVNode?: VNode,
+  newVNode?: VNode | VEntity,
+  oldVNode?: VNode | VEntity,
   effects: DOMOperation[] = [],
 ) => {
   const data = diff(el, newVNode, oldVNode, effects, schedule);
@@ -27,11 +27,15 @@ export const patch = (
 };
 
 export const render = (view: VNode | VEntity, el: DOMNode): DOMNode => {
-  if ((<VEntity>view)?.data) {
-    el.appendChild((<ComponentData>(<VEntity>view).data.data).el!);
+  const ref = el[DOM_NODE_REF];
+  if (ref) {
+    patch(ref, view);
   } else {
-    el.appendChild(createElement(view));
+    const newEl = (<VEntity>view)?.data
+      ? (<ComponentData>(<VEntity>view).data.data).el!
+      : createElement(view);
+    el.appendChild(newEl);
+    el[DOM_NODE_REF] = newEl;
   }
-
   return el;
 };

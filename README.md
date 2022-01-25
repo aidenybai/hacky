@@ -19,34 +19,27 @@ npm install hacky
 Below is an extremely simple implementation of a Clicker Game example using Hacky.
 
 ```js
-import { component, render } from 'hacky';
-import { button } from 'hacky/html';
+import { html, render } from 'hacky';
 
-const Clicker = component(function* (initial) {
-  const count = this.state(initial);
-  const buttonWithHandler = button({
-    onClick: () => {
-      count.value++;
-    },
-  });
+function* Clicker({ initial }) {
+  const [count, setCount] = this.useState(initial);
   // We do an infinite loop here because the yield statement
   // will generate a new button vnode every time the state of
   // `count` changes.
-  while (true) {
-    yield buttonWithHandler(count.value);
-  }
-});
 
-render(Clicker(0), document.body);
+  while (true) {
+    yield html`<button onClick=${() => setCount(count() + 1)}>${count()}</button>`;
+  }
+}
+
+render(html`<p><${Clicker} initial=${0} /></p>`, document.body);
 ```
 
 `render()` function has a standard interface that is used in many Virtual DOM libraries. First argument is a Virtual DOM to render, and the second one is a DOM node that will be used as the live DOM reference.
 
-`component()` function accepts a generator function that yields the "Virtual DOM" nodes.
+`html()` tagged templates can produce Virtual DOM nodes, which define your DOM view.
 
-`button(props?)(children)` function will instantiate a "Virtual DOM" node for an element.
-
-`this.state()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
+`this.useState()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
 
 ## Acknowledgments
 

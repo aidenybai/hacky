@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  htm: ^3.1.0
   million: ^1.2.1
   rollup: ^2.64.0
   rollup-plugin-filesize: ^9.1.2
@@ -12,6 +13,7 @@ specifiers:
   vite: ^2.7.12
 
 dependencies:
+  htm: 3.1.0
   million: 1.2.1
 
 devDependencies:
@@ -1193,6 +1195,10 @@ packages:
     dependencies:
       lru-cache: 6.0.0
     dev: true
+
+  /htm/3.1.0:
+    resolution: {integrity: sha512-L0s3Sid5r6YwrEvkig14SK3Emmc+kIjlfLhEGn2Vy3bk21JyDEes4MoDsbJk6luaPp8bugErnxPz86ZuAw6e5Q==}
+    dev: false
 
   /http-cache-semantics/4.1.0:
     resolution: {integrity: sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==}
