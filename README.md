@@ -31,7 +31,7 @@ render(html`<${Clicker} initial=${0} />`, document.body);
 
 `html` tagged templates can produce Virtual DOM nodes, which define your DOM view.
 
-`this.createState()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
+`this.createState()` function will instantiate a new state reference, in which you can mutate by destructuring the getter (index `0`) and setter (index `1`).
 
 ## Acknowledgments
 
