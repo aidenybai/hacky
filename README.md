@@ -29,7 +29,7 @@ render(html`<${Clicker} initial=${0} />`, document.body);
 
 `render()` function has a standard interface that is used in many Virtual DOM libraries. First argument is a Virtual DOM to render, and the second one is a DOM node that will be used as the live DOM reference.
 
-`html\`\`` tagged templates can produce Virtual DOM nodes, which define your DOM view.
+`html` tagged templates can produce Virtual DOM nodes, which define your DOM view.
 
 `this.createState()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
 
