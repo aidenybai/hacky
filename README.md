@@ -22,7 +22,7 @@ Below is an extremely simple implementation of a Clicker Game example using Hack
 import { html, render } from 'hacky';
 
 function* Clicker({ initial }) {
-  const [count, setCount] = this.useState(initial);
+  const [count, setCount] = this.createState(initial);
   // We do an infinite loop here because the yield statement
   // will generate a new button vnode every time the state of
   // `count` changes.
@@ -39,7 +39,7 @@ render(html`<p><${Clicker} initial=${0} /></p>`, document.body);
 
 `html()` tagged templates can produce Virtual DOM nodes, which define your DOM view.
 
-`this.useState()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
+`this.createState()` function will instantiate a new state reference, in which you can mutate by the `.value` property.
 
 ## Acknowledgments
 

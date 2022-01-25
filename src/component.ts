@@ -3,23 +3,6 @@ import { h as m, JSXVNode } from 'million/jsx-runtime';
 import { Props, ComponentData, GeneratorFunction } from './types';
 import { patch } from './vdom';
 
-export const memo = (
-  component: (props: Props) => VEntity | VNode,
-): ((props: Props) => VEntity | VNode) => {
-  const cache = new Map<string, VEntity | VNode>();
-
-  return (props: Props): VEntity | VNode => {
-    const key = JSON.stringify(props);
-    if (cache.has(key)) {
-      return cache.get(key)!;
-    } else {
-      const c = component(props);
-      cache.set(key, c);
-      return c;
-    }
-  };
-};
-
 export const h = (
   tag: string | Function,
   props?: VProps | undefined,
@@ -44,7 +27,7 @@ export const createComponent = (iterator: GeneratorFunction, props: Props = {}) 
   const data: ComponentData = {
     el: undefined,
     update: undefined,
-    useState(state: unknown) {
+    createState(state: unknown) {
       return [
         () => state,
         (value: unknown): void => {
