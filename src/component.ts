@@ -5,7 +5,7 @@ import { patch } from './vdom';
 
 export const h = (
   tag: string | Function,
-  props?: VProps | undefined,
+  props: VProps | undefined = {},
   ...children: JSXVNode[]
 ): VElement | VEntity => {
   if (typeof tag === 'function') {
@@ -39,7 +39,14 @@ export const createComponent = (iterator: GeneratorFunction, props: Props = {}) 
     },
   };
   const component = iterator.bind(data)(props);
-  data.diff = () => <VNode>component.next().value;
+  data.diff = () => {
+    const next = <VNode | VNode[]>component.next().value;
+    if (Array.isArray(next)) {
+      return <VNode>h('_', undefined, ...next);
+    } else {
+      return <VNode>next;
+    }
+  };
   data.el = createElement(data.diff());
   data.update = () => {
     const vnode = data.diff!();

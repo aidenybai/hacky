@@ -24,7 +24,7 @@ function* Cats({ width, height }) {
   const [message, setMessage] = this.createState('Fetch cat image');
   const [disabled, setDisabled] = this.createState(false);
 
-  const addCat = ({ target }) => {
+  const addCat = () => {
     setMessage('Fetching...');
     setDisabled(true);
 
@@ -45,11 +45,11 @@ function* Cats({ width, height }) {
     const catImages = cats().map(
       (cat) => html`<img key=${cat} src=${cat} width=${width} height=${height} />`,
     );
-    yield html`<div style="font-size: 0">
-      <button disabled=${disabled()} onClick=${addCat} style="width: 100%">${message()}</button>
+    yield html`<button disabled=${disabled()} onClick=${addCat} style="width: 100%">
+        ${message()}
+      </button>
 
-      <div>${catImages}</div>
-    </div>`;
+      <div>${catImages}</div>`;
   }
 }
 
