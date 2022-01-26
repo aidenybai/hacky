@@ -14,31 +14,41 @@ Below is an implementation of a `random.cat` API fetcher example using Hacky ([L
 import { html, render } from 'https://cdn.skypack.dev/hacky';
 
 const fetchCat = async (url = 'https://aws.random.cat/meow') => {
-  try {
-    const res = await fetch(url);
-    const { file } = await res.json();
-    return file;
-  } catch (err) {
-    console.error(err);
-  }
+  const res = await fetch(url);
+  const { file } = await res.json();
+  return file;
 };
 
 function* Cats({ width, height }) {
   const [cats, setCats] = this.createState([]);
-  const addCat = () => {
-    fetchCat().then((newCat) => {
-      setCats([newCat, ...cats()]);
-    });
+  const [message, setMessage] = this.createState('Fetch cat image');
+  const [disabled, setDisabled] = this.createState(false);
+
+  const addCat = ({ target }) => {
+    setMessage('Fetching...');
+    setDisabled(true);
+
+    fetchCat()
+      .then((newCat) => {
+        setCats([...cats(), newCat]);
+        setMessage('Fetch cat image');
+        setDisabled(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setMessage('Failed to fetch. Retrying...');
+        setTimeout(() => addCat(event), 1000);
+      });
   };
 
   while (true) {
-    yield html`<div>
-      <button onClick=${addCat}>Fetch cat image</button>
-      <br />
-      <br />
-      <div>
-        ${cats().map((cat) => html`<img key=${cat} src=${cat} width=${width} height=${height} />`)}
-      </div>
+    const catImages = cats().map(
+      (cat) => html`<img key=${cat} src=${cat} width=${width} height=${height} />`,
+    );
+    yield html`<div style="font-size: 0">
+      <button disabled=${disabled()} onClick=${addCat} style="width: 100%">${message()}</button>
+
+      <div>${catImages}</div>
     </div>`;
   }
 }
