@@ -36,7 +36,9 @@ function* Cats({ width, height }) {
       <button onClick=${addCat}>Fetch cat image</button>
       <br />
       <br />
-      <div>${cats().map((cat) => html`<img src=${cat} width=${width} height=${height} />`)}</div>
+      <div>
+        ${cats().map((cat) => html`<img key=${cat} src=${cat} width=${width} height=${height} />`)}
+      </div>
     </div>`;
   }
 }
