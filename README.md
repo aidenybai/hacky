@@ -24,32 +24,30 @@ function* Cats({ width, height }) {
   const [message, setMessage] = this.createState('Fetch cat image');
   const [disabled, setDisabled] = this.createState(false);
 
-  const addCat = () => {
+  const addCat = async () => {
     setMessage('Fetching...');
     setDisabled(true);
 
-    fetchCat()
-      .then((newCat) => {
-        setCats([...cats(), newCat]);
-        setMessage('Fetch cat image');
-        setDisabled(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setMessage('Failed to fetch. Retrying...');
-        setTimeout(() => addCat(event), 1000);
-      });
+    try {
+      const newCat = await fetchCat();
+      setCats([...cats(), newCat]);
+      setMessage('Fetch cat image');
+      setDisabled(false);
+    } catch (err) {
+      console.error(err);
+      setMessage('Failed to fetch. Retrying...');
+      setTimeout(() => addCat(), 1000);
+    }
   };
 
   while (true) {
     const catImages = cats().map(
       (cat) => html`<img key=${cat} src=${cat} width=${width} height=${height} />`,
     );
-    yield html`<button disabled=${disabled()} onClick=${addCat} style="width: 100%">
-        ${message()}
-      </button>
-
-      <div>${catImages}</div>`;
+    yield html`
+      <button disabled=${disabled()} onClick=${addCat} style="width: 100%">${message()}</button>
+      <div>${catImages}</div>
+    `;
   }
 }
 
