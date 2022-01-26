@@ -44,7 +44,6 @@ export const createComponent = (iterator: GeneratorFunction, props: Props = {}) 
   data.update = () => {
     const vnode = data.diff!();
     schedule(() => {
-      console.log(vnode);
       patch(data.el!, vnode);
     });
   };

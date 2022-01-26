@@ -16,31 +16,32 @@ import { html, render } from 'https://cdn.skypack.dev/hacky';
 const fetchCat = async (url = 'https://aws.random.cat/meow') => {
   try {
     const res = await fetch(url);
-    const body = await res.json();
-    return body.file;
+    const { file } = await res.json();
+    return file;
   } catch (err) {
     console.error(err);
   }
 };
 
-function* Cat({ width, height }) {
-  const [cat, setCat] = this.createState(null);
+function* Cats({ width, height }) {
+  const [cats, setCats] = this.createState([]);
+  const addCat = () => {
+    fetchCat().then((newCat) => {
+      setCats([newCat, ...cats()]);
+    });
+  };
 
   while (true) {
     yield html`<div>
-      <button
-        onClick=${() => {
-          fetchCat().then(setCat);
-        }}
-      >
-        Fetch cat image</button
-      ><br /><br />
-      ${cat() && html`<img src=${cat()} width=${width} height=${height} />`}
+      <button onClick=${addCat}>Fetch cat image</button>
+      <br />
+      <br />
+      <div>${cats().map((cat) => html`<img src=${cat} width=${width} height=${height} />`)}</div>
     </div>`;
   }
 }
 
-render(html`<${Cat} width=${400} height=${400} />`, document.body);
+render(html`<${Cats} width=${100} height=${100} />`, document.body);
 ```
 
 `render()` function has a standard interface that is used in many Virtual DOM libraries. First argument is a Virtual DOM to render, and the second one is a DOM node that will be used as the live DOM reference.
