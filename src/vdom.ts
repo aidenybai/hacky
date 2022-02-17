@@ -34,6 +34,7 @@ export const render = (view: VNode | VEntity | (VNode | VEntity)[], el: DOMNode)
   const vnode = isChildren
     ? <VNode>h('_', undefined, ...(<JSXVNode[]>view))
     : <VNode | VEntity>view;
+
   if (ref) {
     patch(ref, vnode);
   } else {
