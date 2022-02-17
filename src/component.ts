@@ -9,7 +9,7 @@ export const h = (
   ...children: JSXVNode[]
 ): VElement | VEntity => {
   if (typeof tag === 'function') {
-    if (function* () {}.constructor.name.toLowerCase().includes('generatorfunction'))
+    if (tag.toString().includes('function* '))
       return component(<GeneratorFunction>tag)(<Props>props);
     else return tag(props);
   } else {
