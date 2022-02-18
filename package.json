@@ -1,6 +1,6 @@
 {
   "name": "hacky",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "<2kb tagged template alternative for Crank.js",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
