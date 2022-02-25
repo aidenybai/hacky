@@ -17,6 +17,16 @@ export const h = (
   }
 };
 
+export const createContext = (initialData?: ComponentData) => {
+  let data: ComponentData | undefined = initialData;
+  return [
+    () => data,
+    (componentData: ComponentData): void => {
+      data = componentData;
+    },
+  ];
+};
+
 export const component =
   (iterator: GeneratorFunction): ((props: Props) => VEntity) =>
   (props: Props): VEntity => {
