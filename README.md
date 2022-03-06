@@ -1,10 +1,14 @@
-# ⚙️ Hacky
+# ⚙️ Hacky <img src="https://badgen.net/badgesize/brotli/https/unpkg.com/hacky?color=000000&labelColor=00000&label=bundle%20size" alt="Code Size" /> <a href="https://www.npmjs.com/package/hacky" target="_blank"><img src="https://img.shields.io/npm/v/hacky?style=flat&colorA=000000&colorB=000000" alt="NPM Version" /></a>
 
 ### <2kb tagged template alternative for Crank.js
 
-Hacky is something that I've always wanted. I've used React previously, but I find hooks too magical and JSX a finicky process that requires a build step. When I discovered Crank.js, I fell in love because of how intuitive it was to understand. Imagine Hacky as Crank.js with tagged templates, but with a lightweight core and simplistic API.
+Hacky is something that I've always wanted. I've used React previously, but I find **hooks too magical** and JSX a **finicky process** that requires a build step.
 
-> _Plug: Hacky is built on [Million](https://github.com/aidenybai/million), a <1kb compiler-focused virtual DOM. It's fast!_
+When I discovered Crank.js, I fell in love because of how intuitive it was to understand. Imagine Hacky as **Crank.js with tagged templates**, but with a lightweight core and simplistic API.
+
+> If you're looking for something a bit more comprehensive, check out [**Million**](https://github.com/aidenybai/million) — Virtual DOM into the future! 💥🦁✨
+>
+> -Aiden ([@aidenybai](https://github.com/aidenybai))
 
 ## `random.cat` API Example
 
